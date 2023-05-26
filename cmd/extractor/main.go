@@ -11,12 +11,12 @@ import (
 
 func main() {
 	var functions []extractor.Functions
-
+	startingDir := ""
 	fileInfo, _ := os.Stat(startingDir)
 	if fileInfo.IsDir() {
 		functions = readDir(startingDir)
 	}
-
+	conn, err := pgx.Connect(context.Background(), os.Getenv("postgres://username:password@localhost:5432/database_name"))
 	if err != nil {
 		panic(err)
 	}
@@ -27,7 +27,7 @@ func main() {
 	}
 
 	for _, c := range functions {
-		_, err := conn.Exec(context.Background(), "insert into test_db.public.functions (filepath, func_name, body) values ($1,$2,$3);", c.File, c.Name, c.Body)
+		_, err := conn.Exec(context.Background(), "insert into test_db.public.functions (abspath, func_name, body) values ($1,$2,$3);", c.File, c.Name, c.Body)
 		if err != nil {
 			_ = tx.Rollback(ctx)
 			panic(err)
