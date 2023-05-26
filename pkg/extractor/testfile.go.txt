@@ -1,0 +1,29 @@
+func func1() {
+	fmt.Println("asdf")
+}
+func func2() {
+	if true {
+		fmt.Println("asdf")
+	}
+}
+func func3() string {
+	if true {
+		fmt.Println("asdf")
+	}
+	return "sadf"
+}
+func func4(filePath string) (string, error) {
+	if true {
+		fmt.Println("asdf")
+	}
+	return "sadf", nil
+}
+func (c context.CancelFunc) func5(filePath string) (string, error) {
+	if true {
+		fmt.Println("asdf")
+		if false {
+			fmt.Println("{}asdf{}")
+		}
+	}
+	return "sadf", nil
+}
